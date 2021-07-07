@@ -5,23 +5,23 @@ Linkedin Bot which select and add the people according to given keywords.
 
 ### Dependencies 
 
-*This bot is use this language, libraries and driver:*
+This bot is use this language, libraries and driver :
 
  - Python 3.8
  - Pandas 1.0.5
- - Selenium 3.141.0  
+ - Selenium 3.141.0
  - Webdriver
 
 
  ### Installation
  
- *To install this packages run the python installation instruction below in the command line:*
+ To install this packages run the python installation instruction below in the command line :
   
- ```python
+```python
 pip install -U selenium pandas 
 
 ```
-*To install chromedriver :*
+To install chromedriver 
 
 1. Go to chrome://settings/help and find out which is your Chrome's version
 2. Go to https://chromedriver.chromium.org/downloads and find the latest version which supports your Chrome's version.
@@ -29,9 +29,9 @@ pip install -U selenium pandas
 4. Pick the executable and put in drivers' folder.
 5. Replace and rename the executable with one that was already inside driver's folder depending on your O.S.
  
-*And check the dependencies :*
+And check the dependencies :
 
- ```python
+```python
 import pandas
 import selenium
 from selenium import webdriver
@@ -70,11 +70,32 @@ At the beginning there are 4 steps before access the data paart.
 
 7- Saves this informations as a csv file.  
 
+### A Little Optimization :
+
+Search function in the code :
+
+```python
+def search( con, keys ):
+    for c in con:    
+        if  c in keys: 
+            return True   
+
+search( content_sp, key_word )
+```
+This function can be defined in one line with list comprehension method :
+
+```python
+search_one_line = bool( [ True for c in content_sp if c in key_word ] )
+
+search_one_line
+```
+If the scraped data (role information) include one of the keywords both of these ways return "True" value. 
+
 ### ***Example Work***
 
 For this keyword :
 
- ```bash
+```python
  key_word = ['Human','Software','HR','Leader','Manager','Founder','Recruitment','Machine Learning','Data','Vision', ]
  
 ```

@@ -36,22 +36,20 @@ log.click()
 time.sleep( tm )
 
 # click my network tab
-my_net = browser.find_element_by_xpath('//*[@id="ember23"]')
+my_net = browser.find_element_by_xpath('//*[@id="ember26"]')
 my_net.click()
-time.sleep( tm )
+time.sleep( tm*2 )
 
 # data scraping part
 key_word = ['Human','Software','HR','Leader','Manager','Founder','Recruitment',
-            'Machine Learning','Data','Vision' ]
+            'Machine Learning','Data','Vision',"Python", "C++"]
 
-def search( con, keys ):
-    sz = len( key_word )
+# def search( con, keys ):
+#     for c in con:    
+#         if  c in keys: 
+#             return True   
 
-    for k in range ( 0, sz ):    
-        if  keys[k] in con: 
-            return True
-
-def selection_action( key_word, browser ) :
+def selection( key_word, browser ) :
     count = 0
     d = dict()
     data = dict()
@@ -62,8 +60,10 @@ def selection_action( key_word, browser ) :
         content = browser.find_element_by_class_name('discover-person-card__occupation')
         time.sleep( tm ) 
         content_sp = content.text.split()        
-                
-        if( search( content_sp, key_word )):
+
+        search_one_line = bool( [ True for c in content_sp if c in key_word ] )
+        
+        if( search_one_line ):   # for search function -> search( content_sp, key_word )
             print( )
             name = browser.find_element_by_class_name('discover-person-card__name')
             print( "* " + name.text + " - " + content.text)
@@ -96,10 +96,10 @@ def selection_action( key_word, browser ) :
     print( df )
     
     # # Saving the data into a csv file,
-    df.to_csv("data.csv",index=False) 
+    df.to_csv("data_1.csv",index=False) 
     
 
-selection_action(key_word, browser)
+selection(key_word, browser)
 
 #close browser
 browser.close()
